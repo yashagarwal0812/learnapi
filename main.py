@@ -1,4 +1,4 @@
-import jose
+from typing import Optional
 from fastapi import FastAPI, Depends, HTTPException, status, Response, Cookie, Request
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from fastapi.middleware.cors import CORSMiddleware
@@ -29,14 +29,14 @@ class Token(BaseModel):
 
 
 class TokenData(BaseModel):
-    username: str | None = None
+    username: Optional[str] = None
 
 
 class User(BaseModel):
     username: str
-    full_name: str | None = None
-    email: str | None = None
-    disabled: bool | None = None
+    full_name: Optional[str] = None
+    email: Optional[str] = None
+    disabled: Optional[bool] = None
 
 
 class UserInDB(User):
@@ -80,7 +80,7 @@ def authenticate_user(db, username: str, password: str):
     return user
 
 
-def create_access_token(data: dict, expires_delta: timedelta | None = None):
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
