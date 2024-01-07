@@ -144,7 +144,7 @@ async def login_for_access_token(response: Response, form_data: OAuth2PasswordRe
     expires_formatted = cookie_expires.strftime("%a, %d %b %Y %H:%M:%S GMT")
     access_token = create_access_token(data={"sub": user.username}, expires_delta=access_token_expires)
     response.set_cookie(key="token", value=access_token, expires=expires_formatted, httponly=True)
-    return
+    return {"message": "cookie set"}
 
 
 @app.get("/users/me/", response_model=User)
