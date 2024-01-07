@@ -1,3 +1,4 @@
+import jose
 from fastapi import FastAPI, Depends, HTTPException, status, Response, Cookie, Request
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from fastapi.middleware.cors import CORSMiddleware
